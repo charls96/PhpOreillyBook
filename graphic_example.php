@@ -1,5 +1,5 @@
 <?php
-    if (isset($_GET['message'])) {
+if (isset($_GET['message'])) {
     // load font and image, calculate width of text
     $font = dirname(__FILE__) . '/fonts/blazed.ttf';
     $size = 12;
@@ -11,23 +11,34 @@
     $x = (imagesx($image) - $dx) / 2;
     $y = (imagesy($image) - $dy) / 2 + $dy;
     // draw text
-    $black = imagecolorallocate($im,0,0,0);
-    imagettftext($image, $size, 0, $x, $y, $black, $font,
-    $_GET['message']);
+    $black = imagecolorallocate($im, 0, 0, 0);
+    imagettftext(
+        $image,
+        $size,
+        0,
+        $x,
+        $y,
+        $black,
+        $font,
+        $_GET['message']
+    );
     // return image
     header("Content-type: image/png");
     imagepng($image);
     exit;
 } ?>
 <html>
-    <head>
+
+<head>
     <title>Button Form</title>
-    </head>
-    <body>
+</head>
+
+<body>
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET">
-    Enter message to appear on button:
-    <input type="text" name="message" /><br />
-    <input type="submit" value="Create Button" />
+        Enter message to appear on button:
+        <input type="text" name="message" /><br />
+        <input type="submit" value="Create Button" />
     </form>
-    </body>
+</body>
+
 </html>
